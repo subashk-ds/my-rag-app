@@ -1,0 +1,17 @@
+# Virtual environment
+venv/
+
+# API keys (IMPORTANT - keeps your key secret!)
+.env
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Database folders
+my_document_db/
+hybrid_db/
+rerank_db/
+
+# Evaluation results
+evaluation_results.json

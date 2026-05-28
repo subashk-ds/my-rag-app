@@ -1,0 +1,10 @@
+langchain
+langchain-community
+langchain-cohere
+langchain-text-splitters
+chromadb
+cohere
+python-dotenv
+sentence-transformers
+rank-bm25
+numpy

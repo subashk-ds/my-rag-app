@@ -1,0 +1,5 @@
+My name is Rahul. I am a student learning AI.
+I live in Mumbai, India. My favorite subject is Python programming.
+I want to build a RAG application that can answer questions from documents.
+Pizza is my favorite food. I like margherita pizza with extra cheese.
+I practice coding every day for 2 hours.

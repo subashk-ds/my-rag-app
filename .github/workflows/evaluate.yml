@@ -1,0 +1,38 @@
+name: RAG System Evaluation
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  evaluate:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install cohere python-dotenv
+    
+    - name: Create test document
+      run: |
+        echo "My name is Rahul." > my_document.txt
+        echo "I live in Mumbai." >> my_document.txt
+        echo "Pizza is my favorite food." >> my_document.txt
+        echo "I want to build a RAG app." >> my_document.txt
+    
+    - name: Run evaluation
+      env:
+        COHERE_API_KEY: ${{ secrets.COHERE_API_KEY }}
+      run: python simple_evaluate.py
