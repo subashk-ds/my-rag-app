@@ -1,0 +1,40 @@
+name: RAG System Test
+
+on: [push]
+
+jobs:
+  test-rag:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Install packages
+        run: |
+          pip install cohere python-dotenv
+      
+      - name: Create test file
+        run: |
+          echo "My name is Rahul." > my_document.txt
+          echo "I live in Mumbai." >> my_document.txt
+      
+      - name: Test Cohere API
+        env:
+          COHERE_API_KEY: ${{ secrets.COHERE_API_KEY }}
+        run: |
+          python -c "
+import cohere
+import os
+api_key = os.getenv('COHERE_API_KEY')
+print('API key exists:', bool(api_key))
+co = cohere.ClientV2(api_key)
+response = co.chat(
+    model='command-r-plus-08-2024',
+    messages=[{'role': 'user', 'content': 'Say hello'}]
+)
+print('✅ Cohere API is WORKING!')
+print('Response:', response.message.content[0].text[:50])
+"
